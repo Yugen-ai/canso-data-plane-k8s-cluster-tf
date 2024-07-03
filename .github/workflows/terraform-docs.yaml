@@ -16,3 +16,10 @@ jobs:
         working-dir: ./modules/canso-vpc
         output-file: "canso-dataplane-vpc.md"
         git-push: "true"
+
+    - name: Render terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: ./modules/canso-eks
+        output-file: "canso-dataplane-eks.md"
+        git-push: "true"    
