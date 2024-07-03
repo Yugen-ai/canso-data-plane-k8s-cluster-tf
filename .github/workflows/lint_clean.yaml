@@ -1,0 +1,18 @@
+name: 'Lint and Clean'
+
+on:
+  pull_request:
+
+  push:
+    branches:
+      - main
+
+jobs:
+  fmt:
+    name: Terraform FMT
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: terraform fmt --recursive --diff -check=true
