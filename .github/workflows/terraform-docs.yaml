@@ -13,5 +13,6 @@ jobs:
     - name: Render terraform docs and push changes back to PR
       uses: terraform-docs/gh-actions@main
       with:
-        output-file: "aws-k8s-data-plane.md"
+        working-dir: ./modules/canso-vpc
+        output-file: "canso-dataplane-vpc.md"
         git-push: "true"
