@@ -144,6 +144,24 @@ canso-data-plane-k8s-cluster-tf/
         └── variables.tf
 ```
 
+### Usage
+
+#### Step 1 - AWS VPC
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/vpc/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/vpc/auto.tfvars) file if needed.
+
+To create the VPC, navigate to the `canso-vpc` module directory and run the following Terraform commands:
+
+```sh
+cd modules/canso-vpc
+terraform init -backend-config=../../canso-dataplane-configs/vpc/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/vpc/auto.tfvars
+```
+
+
+---
+
 ## Roadmap
 
 - [ ] AWS EKS - Currently in progress

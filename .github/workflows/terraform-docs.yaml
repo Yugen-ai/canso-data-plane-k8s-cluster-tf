@@ -5,13 +5,19 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+      
     steps:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
 
-    - name: Render terraform docs and push changes back to PR
+    - name: Render vpc terraform docs and push changes back to PR
       uses: terraform-docs/gh-actions@main
       with:
-        output-file: "aws-k8s-data-plane.md"
+        working-dir: ./modules/canso-vpc
+        output-file: "aws-k8s-data-plane-canso-vpc.md"
         git-push: "true"
