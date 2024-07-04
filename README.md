@@ -280,7 +280,18 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 ---
 
-### Step 4 - TBU
+### Step 4 - AWS EFS
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/efs/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/efs/auto.tfvars) file if needed. Use private `subnet_ids` and `vpc_name` from the outputs of the VPC module.
+
+To create the EFS, navigate to the `canso-efs` module directory and run the following Terraform commands:
+
+```sh
+cd modules/canso-efs
+terraform init -backend-config=../../canso-dataplane-configs/efs/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/efs/auto.tfvars
+```
 
 ---
 

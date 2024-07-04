@@ -35,3 +35,10 @@ jobs:
         working-dir: ./modules/canso-irsa
         output-file: "aws-k8s-data-plane-canso-irsa.md"
         git-push: "true"
+
+    - name: Render EFS terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: ./modules/canso-efs
+        output-file: "aws-k8s-data-plane-canso-efs.md"
+        git-push: "true"
