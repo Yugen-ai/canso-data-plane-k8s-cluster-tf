@@ -1,0 +1,6 @@
+vpc_name         = "xxxxxxxxxxxxxxxxx"
+efs_sg_name      = "efs-sg"
+efs_name         = "canso-dataplane-airflow-efs"
+subnet_id_alpha1 = "subnet-xxxxxxxxxxxxxxxxx"
+subnet_id_alpha2 = "subnet-xxxxxxxxxxxxxxxxx"
+region           = "ap-south-1"

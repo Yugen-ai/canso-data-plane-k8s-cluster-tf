@@ -153,7 +153,7 @@ canso-data-plane-k8s-cluster-tf/
 
 To create the VPC, navigate to the `canso-vpc` module directory and run the following Terraform commands:
 
-```sh
+```console
 cd modules/canso-vpc
 terraform init -backend-config=../../canso-dataplane-configs/vpc/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/vpc/auto.tfvars
@@ -168,7 +168,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 To create the EKS, navigate to the `canso-eks` module directory and run the following Terraform commands:
 
-```sh
+```console
 cd modules/canso-eks
 terraform init -backend-config=../../canso-dataplane-configs/eks/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/eks/auto.tfvars
@@ -216,7 +216,7 @@ To create the IRSA Roles, navigate to the `canso-irsa` module directory and run 
 
 1. Create ALB controller IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/alb-controller/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars
@@ -224,7 +224,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 2. Create Karpenter IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/karpenter/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars
@@ -232,7 +232,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 3. Create external-secrets IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/external-secrets/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars
@@ -240,7 +240,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 4. Create ebs-driver IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars
@@ -248,7 +248,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 5. Create efs-driver IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/efs-driver/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars
@@ -256,7 +256,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 6. Create Spark IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/spark/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/spark/auto.tfvars
@@ -264,7 +264,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 7. Create Canso Agent IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/dev-agent/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/dev-agent/auto.tfvars
@@ -272,7 +272,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 8. Create Airflow IRSA
 
-```sh
+```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/airflow/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/airflow/auto.tfvars
@@ -280,7 +280,23 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 ---
 
-### Step 4 - TBU
+### Step 4 - AWS EFS
+
+> [!IMPORTANT]
+> Dependencies (Output from the VPC module to be used as inputs here)
+> 1. `subnet_ids`: The private subnet IDs of the VPC
+> 2. `vpc_name`: The name of the VPC
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/efs/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/efs/auto.tfvars) file if needed. Use private `subnet_ids` and `vpc_name` from the outputs of the VPC module.
+
+To create the EFS, navigate to the `canso-efs` module directory and run the following Terraform commands:
+
+```console
+cd modules/canso-efs
+terraform init -backend-config=../../canso-dataplane-configs/efs/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/efs/auto.tfvars
+```
 
 ---
 
