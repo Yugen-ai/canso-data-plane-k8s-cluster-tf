@@ -5,7 +5,7 @@ variable "vpc_name" {
 
 variable "region" {
   type        = string
-  description = "enter region name"
+  description = "AWS region name"
 }
 
 variable "subnet_id_alpha1" {
@@ -24,6 +24,6 @@ variable "efs_name" {
 }
 
 variable "efs_sg_name" {
-  description = "Name of EFS sg"
+  description = "Name of EFS Security Group"
   type        = string
 }

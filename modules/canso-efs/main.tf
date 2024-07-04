@@ -1,5 +1,5 @@
 ############################### 
-## NFS Security Group
+## AWS Security Group
 ###############################
 
 resource "aws_security_group" "nfs_sg" {
@@ -28,7 +28,7 @@ resource "aws_security_group" "nfs_sg" {
 }
 
 ############################### 
-## EFS
+## AWS Elastic File System
 ###############################
 
 resource "aws_efs_file_system" "fs" {
@@ -41,7 +41,7 @@ resource "aws_efs_file_system" "fs" {
 }
 
 ############################### 
-## EFS Mount Points
+## AWS EFS Mount Targets
 ###############################
 
 resource "aws_efs_mount_target" "alpha1" {
