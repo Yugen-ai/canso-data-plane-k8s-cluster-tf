@@ -195,8 +195,22 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 
 ### Step 3 - AWS IRSA Roles
 
-1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/eks/backend.conf) if needed.
-2. Update the [`auto.tfvars`](./canso-dataplane-configs/eks/auto.tfvars) file if needed. For each IRSA roles creation.
+We create the following IRSA roles in this step, each of which are in separate modules.
+
+| IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                              |
+|------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)  |
+| Karpenter        | [Tfvars File](./canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars)        | [Conf File](./canso-dataplane-configs/irsa-roles/karpenter/backend.conf)       |
+| External Secrets | [Tfvars File](./canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars) | [Conf File](./canso-dataplane-configs/irsa-roles/external-secrets/backend.conf)|
+| EBS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf)      |
+| EFS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/efs-driver/backend.conf)      |
+| Spark IRSA       | [Tfvars File](./canso-dataplane-configs/irsa-roles/spark/auto.tfvars)            | [Conf File](./canso-dataplane-configs/irsa-roles/spark/backend.conf)           |
+| Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)     |
+| Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)         |
+
+
+1. Update the S3 bucket and DynamoDB table details in the `backend.conf` file in the respective folders if needed.
+2. Update the `auto.tfvars` file in the respective folder if needed
 
 To create the IRSA Roles, navigate to the `canso-irsa` module directory and run the following Terraform commands:
 
@@ -204,64 +218,64 @@ To create the IRSA Roles, navigate to the `canso-irsa` module directory and run 
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/alb-controller-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/alb-controller-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/alb-controller/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars
 ```
 
-2. Create karpenter IRSA
+2. Create Karpenter IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/karpenter-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/karpenter-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/karpenter/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars
 ```
 
 3. Create external-secrets IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/external-secrets-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/external-secrets-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/external-secrets/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars
 ```
 
 4. Create ebs-driver IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/ebs-driver-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/ebs-driver-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars
 ```
 
 5. Create efs-driver IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/efs-driver-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/efs-driver-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/efs-driver/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars
 ```
 
-6. Create spark IRSA
+6. Create Spark IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/spark-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/spark-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/spark/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/spark/auto.tfvars
 ```
 
-7. Create Dev agent IRSA
+7. Create Canso Agent IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/dev-agent-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/dev-agent-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/dev-agent/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/dev-agent/auto.tfvars
 ```
 
-8. Create airflow IRSA
+8. Create Airflow IRSA
 
 ```sh
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/airflow-irsa/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/airflow-irsa/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/airflow/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/airflow/auto.tfvars
 ```
 
 ---
