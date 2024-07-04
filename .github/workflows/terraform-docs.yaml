@@ -21,3 +21,10 @@ jobs:
         working-dir: ./modules/canso-vpc
         output-file: "aws-k8s-data-plane-canso-vpc.md"
         git-push: "true"
+    
+    - name: Render eks terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: ./modules/canso-eks
+        output-file: "aws-k8s-data-plane-canso-eks.md"
+        git-push: "true"
