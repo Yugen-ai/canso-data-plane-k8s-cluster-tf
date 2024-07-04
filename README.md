@@ -146,7 +146,7 @@ canso-data-plane-k8s-cluster-tf/
 
 ### Usage
 
-#### Step 1 - AWS VPC
+### Step 1 - AWS VPC
 
 1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/vpc/backend.conf) if needed.
 2. Update the [`auto.tfvars`](./canso-dataplane-configs/vpc/auto.tfvars) file if needed.
@@ -159,6 +159,41 @@ terraform init -backend-config=../../canso-dataplane-configs/vpc/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/vpc/auto.tfvars
 ```
 
+---
+
+### Step 2 - AWS EKS
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/eks/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/eks/auto.tfvars) file if needed. Use private `subnet_ids` and `vpc_id` from the outputs of the VPC module.
+
+To create the EKS, navigate to the `canso-eks` module directory and run the following Terraform commands:
+
+```sh
+cd modules/canso-eks
+terraform init -backend-config=../../canso-dataplane-configs/eks/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/eks/auto.tfvars
+```
+
+> [!IMPORTANT]
+> Dependencies (Output from the VPC module to be used as inputs here)
+> 1. `vpc_module_private_subnet_ids`: The private subnet IDs of the VPC
+> 2. `vpc_module_vpc_id`: The ID of the VPC
+
+```terraform
+private_subnet_ids = [
+  "subnet-xxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxx",
+]
+public_subnet_ids = [
+  "subnet-xxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxx",
+]
+vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
+```
+
+---
+
+### Step 3 - TBU
 
 ---
 
