@@ -193,7 +193,80 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 
 ---
 
-### Step 3 - TBU
+### Step 3 - AWS IRSA Roles
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/eks/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/eks/auto.tfvars) file if needed. For each IRSA roles creation.
+
+To create the IRSA Roles, navigate to the `canso-irsa` module directory and run the following Terraform commands:
+
+1. Create ALB controller IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/alb-controller-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/alb-controller-irsa/auto.tfvars
+```
+
+2. Create karpenter IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/karpenter-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/karpenter-irsa/auto.tfvars
+```
+
+3. Create external-secrets IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/external-secrets-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/external-secrets-irsa/auto.tfvars
+```
+
+4. Create ebs-driver IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/ebs-driver-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/ebs-driver-irsa/auto.tfvars
+```
+
+5. Create efs-driver IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/efs-driver-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/efs-driver-irsa/auto.tfvars
+```
+
+6. Create spark IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/spark-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/spark-irsa/auto.tfvars
+```
+
+7. Create Dev agent IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/dev-agent-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/dev-agent-irsa/auto.tfvars
+```
+
+8. Create airflow IRSA
+
+```sh
+cd modules/canso-irsa
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/airflow-irsa/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/airflow-irsa/auto.tfvars
+```
+
+---
+
+### Step 4 - TBU
 
 ---
 
