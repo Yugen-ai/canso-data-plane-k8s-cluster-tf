@@ -298,6 +298,27 @@ terraform init -backend-config=../../canso-dataplane-configs/efs/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/efs/auto.tfvars
 ```
 
+### Step 5 - AWS RDS
+
+> [!CAUTION]
+> The RDS module is used to create a production grade DB for Airflow. When deployed using helm
+> Airflow creates a development Postgres DB, which is fine for development and testing purposes.
+> However, for production pipelines & jobs orchestrated & managed by Airflow, it is strongly
+> recommended to use an external DB such as RDS. The Canso module creates a Postgres DB in RDS
+> by default.
+
+> [!IMPORTANT]
+> Dependencies - Create a Security Group for RDS, which will then be used as an input in the 
+> [`auto.tfvars`](./canso-dataplane-configs/rds/auto.tfvars) file
+
+To create the RDS DB instance, navigate to the `canso-rds` module directory and run the following Terraform commands:
+
+```console
+cd modules/canso-rds
+terraform init -backend-config=../../canso-dataplane-configs/rds/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/rds/auto.tfvars
+```
+
 ---
 
 ## Roadmap
