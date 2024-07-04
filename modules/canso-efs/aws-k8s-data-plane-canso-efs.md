@@ -28,8 +28,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_efs_name"></a> [efs\_name](#input\_efs\_name) | Name for the AWS EFS file system | `string` | n/a | yes |
-| <a name="input_efs_sg_name"></a> [efs\_sg\_name](#input\_efs\_sg\_name) | Name of EFS sg | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | enter region name | `string` | n/a | yes |
+| <a name="input_efs_sg_name"></a> [efs\_sg\_name](#input\_efs\_sg\_name) | Name of EFS Security Group | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | AWS region name | `string` | n/a | yes |
 | <a name="input_subnet_id_alpha1"></a> [subnet\_id\_alpha1](#input\_subnet\_id\_alpha1) | Subnet ID for aws\_efs\_mount\_target.alpha1 | `string` | n/a | yes |
 | <a name="input_subnet_id_alpha2"></a> [subnet\_id\_alpha2](#input\_subnet\_id\_alpha2) | Subnet ID for aws\_efs\_mount\_target.alpha2 | `string` | n/a | yes |
 | <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name of the VPC to filter | `string` | n/a | yes |
