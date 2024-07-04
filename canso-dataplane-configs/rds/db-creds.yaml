@@ -1,0 +1,20 @@
+################################################
+## 1. Add your username & password below.
+## 2. Then encrypt them using a KMS key
+################################################
+
+---
+username: my_username
+password: my_strong_password
+
+
+################################################
+## Command to generate encrypted credentials
+################################################
+
+# aws kms encrypt \
+#   --plaintext fileb://db-creds.yaml \
+#   --key-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+#   --region ap-south-1 \
+#   --output text \
+#   --query CiphertextBlob > db-creds.yaml.encrypted
