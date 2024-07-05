@@ -237,7 +237,7 @@ role_name   = "canso-dataplane-alb-controller-irsa-role"
 name_prefix = "canso-dataplane-alb-controller-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["kube-system:aws-load-balancer-controller"]
+  "canso-dataplane-cluster" = ["aws-load-balancer-controller:aws-load-balancer-controller"]
 }
 
 tags = {
