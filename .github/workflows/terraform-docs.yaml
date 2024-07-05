@@ -49,3 +49,10 @@ jobs:
         working-dir: ./modules/canso-rds
         output-file: "aws-k8s-data-plane-canso-rds.md"
         git-push: "true"
+
+    - name: Render S3 terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: ./modules/canso-s3
+        output-file: "aws-k8s-data-plane-canso-s3.md"
+        git-push: "true"

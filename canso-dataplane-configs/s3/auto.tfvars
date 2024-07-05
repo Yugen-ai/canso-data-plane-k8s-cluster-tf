@@ -1,0 +1,9 @@
+buckets                  = ["canso-materialised-features", "canso-materialised-artifacts", "canso-materialised-logs"] # Do not change these names since the canso developer agent and job orchestrator assume these buckets to be present in the data plane
+bucket_acl               = "private"
+force_destroy            = true
+versioning_enabled       = true
+lifecycle_rule_enabled   = true
+transition_days          = 120
+transition_storage_class = "GLACIER"
+expiration_days          = 365
+region                   = "ap-south-1"
