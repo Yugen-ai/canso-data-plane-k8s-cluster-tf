@@ -321,6 +321,25 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 ---
 
+### Step 6 - AWS S3
+
+1. Update the S3 bucket and DynamoDB table details in [`backend.conf`](./canso-dataplane-configs/s3/backend.conf) if needed.
+2. Update the [`auto.tfvars`](./canso-dataplane-configs/s3/auto.tfvars) file if needed.
+
+> [!WARNING]
+> DO NOT CHANGE THE BUCKET NAMES
+> [`auto.tfvars`](./canso-dataplane-configs/s3/auto.tfvars) file
+
+To create the S3 buckets, navigate to the `canso-s3` module directory and run the following Terraform commands:
+
+```console
+cd modules/canso-s3
+terraform init -backend-config=../../canso-dataplane-configs/s3/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/s3/auto.tfvars
+```
+
+---
+
 ## Roadmap
 
 - [ ] AWS EKS - Currently in progress
