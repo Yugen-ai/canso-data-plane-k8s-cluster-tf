@@ -197,16 +197,16 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 
 We create the following IRSA roles in this step, each of which are in separate modules.
 
-| IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                              |
-|------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)  |
-| Karpenter        | [Tfvars File](./canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars)        | [Conf File](./canso-dataplane-configs/irsa-roles/karpenter/backend.conf)       |
-| External Secrets | [Tfvars File](./canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars) | [Conf File](./canso-dataplane-configs/irsa-roles/external-secrets/backend.conf)|
-| EBS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf)      |
-| EFS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/efs-driver/backend.conf)      |
-| Spark IRSA       | [Tfvars File](./canso-dataplane-configs/irsa-roles/spark/auto.tfvars)            | [Conf File](./canso-dataplane-configs/irsa-roles/spark/backend.conf)           |
-| Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)     |
-| Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)         |
+| IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                              | RoleArnName            |
+|------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|------------------------|
+| ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)  | canso-dataplane-alb-controller-irsa-role        |
+| Karpenter        | [Tfvars File](./canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars)        | [Conf File](./canso-dataplane-configs/irsa-roles/karpenter/backend.conf)       | canso-dataplane-karpenter-prod-irsa-role         |
+| External Secrets | [Tfvars File](./canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars) | [Conf File](./canso-dataplane-configs/irsa-roles/external-secrets/backend.conf)| canso-dataplane-external-secrets-prod-irsa-role  |
+| EBS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf)      | canso-dataplane-ebs-csi-prod-irsa-role           |
+| EFS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/efs-driver/backend.conf)      | canso-dataplane-efs-csi-prod-irsa-role           |
+| Spark IRSA       | [Tfvars File](./canso-dataplane-configs/irsa-roles/spark/auto.tfvars)            | [Conf File](./canso-dataplane-configs/irsa-roles/spark/backend.conf)           | canso-dataplane-spark-s3-irsa-role               |
+| Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)     | devagent-dataplane-irsa-role                     |
+| Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)         | airflow-canso-dataplane-irsa-role                |
 
 
 1. Update the S3 bucket and DynamoDB table details in the `backend.conf` file in the respective folders if needed.
