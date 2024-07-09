@@ -26,6 +26,27 @@ The following terraform modules are used to set up the data plane cluster -
 - `canso-rds`
 - `canso-alb-controller`
 - `canso-public-alb`
+- `canso-s3`
+
+
+## Integration with Canso Platform Helm Charts
+
+Canso Applications are deployed in your EKS cluster (also called the data plane) as [ArgoCD applications/applicationsets](https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/), which in turn install and manage a bunch of [Helm charts](https://helm.sh/). When you log into the Canso Web app, the onboarding flow asks for certain inputs, some of which reference the resources created using the terraform modules present in this repo. It is therefore mandatory that the names of these resources generated using terraform provisioning and the values needed during helm installation match. The table below lists those resources and their default values.
+
+> [!CAUTION]
+> At the time of onboarding, you'll see a section in the Web app called **Role ARNs**. This section is a dictionary with keys = Component & values = IAM Role Value (Default) from the table below.
+> While [creating these IRSA Roles (See Step 3)](./README.md#step-3---aws-irsa-roles) if you've made any changes to the names of these roles, make sure to provide the same names, else Canso components will not get installed successfully.
+
+| Component                      | IRSA Name                                         | IAM Role Value (Default)                                                             |
+|--------------------------------|---------------------------------------------------|--------------------------------------------------------------------------------------|
+| `aws_load_balancer_controller` | `canso-dataplane-alb-controller-irsa-role`        | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-alb-controller-irsa-role`        |
+| `canso_karpenter`              | `canso-dataplane-karpenter-prod-irsa-role`        | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-karpenter-prod-irsa-role`        |
+| `external_secrets`             | `canso-dataplane-external-secrets-prod-irsa-role` | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-external-secrets-prod-irsa-role` |
+| `aws_ebs_csi_driver`           | `canso-dataplane-ebs-csi-prod-irsa-role`          | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-ebs-csi-prod-irsa-role`          |
+| `aws_efs_csi_driver`           | `canso-dataplane-efs-csi-prod-irsa-role`          | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-efs-csi-prod-irsa-role`          |
+| `spark`                        | `canso-dataplane-spark-s3-irsa-role`              | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-spark-s3-irsa-role`              |
+| `canso_agent`                  | `devagent-dataplane-irsa-role`                    | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/devagent-dataplane-irsa-role`                    |
+| `canso_airflow`                | `airflow-canso-dataplane-irsa-role`               | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/airflow-canso-dataplane-irsa-role`               |
 
 
 ## Dependencies
@@ -195,19 +216,22 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 
 ### Step 3 - AWS IRSA Roles
 
+> [!CAUTION]
+> Please read the section on [IRSA role names](./README.md#integration-with-canso-platform-helm-charts)
+> TL;DR - Strongly recommend not changing the names of IRSA roles for quicker helm chart installation.
+
 We create the following IRSA roles in this step, each of which are in separate modules.
 
-| IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                              |
-|------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)  |
-| Karpenter        | [Tfvars File](./canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars)        | [Conf File](./canso-dataplane-configs/irsa-roles/karpenter/backend.conf)       |
-| External Secrets | [Tfvars File](./canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars) | [Conf File](./canso-dataplane-configs/irsa-roles/external-secrets/backend.conf)|
-| EBS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf)      |
-| EFS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/efs-driver/backend.conf)      |
-| Spark IRSA       | [Tfvars File](./canso-dataplane-configs/irsa-roles/spark/auto.tfvars)            | [Conf File](./canso-dataplane-configs/irsa-roles/spark/backend.conf)           |
-| Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)     |
-| Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)         |
-
+| IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                               |
+|------------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)   |
+| Karpenter        | [Tfvars File](./canso-dataplane-configs/irsa-roles/karpenter/auto.tfvars)        | [Conf File](./canso-dataplane-configs/irsa-roles/karpenter/backend.conf)        |
+| External Secrets | [Tfvars File](./canso-dataplane-configs/irsa-roles/external-secrets/auto.tfvars) | [Conf File](./canso-dataplane-configs/irsa-roles/external-secrets/backend.conf) |
+| EBS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/ebs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/ebs-driver/backend.conf)       |
+| EFS Driver       | [Tfvars File](./canso-dataplane-configs/irsa-roles/efs-driver/auto.tfvars)       | [Conf File](./canso-dataplane-configs/irsa-roles/efs-driver/backend.conf)       |
+| Spark IRSA       | [Tfvars File](./canso-dataplane-configs/irsa-roles/spark/auto.tfvars)            | [Conf File](./canso-dataplane-configs/irsa-roles/spark/backend.conf)            |
+| Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)      |
+| Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)          |
 
 1. Update the S3 bucket and DynamoDB table details in the `backend.conf` file in the respective folders if needed.
 2. Update the `auto.tfvars` file in the respective folder if needed
