@@ -197,6 +197,8 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 
 We create the following IRSA roles in this step, each of which are in separate modules.
 
+
+
 | IRSA Component   | Path to TfVars File                                                              | Path to conf file                                                              | RoleArnName            |
 |------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|------------------------|
 | ALB Controller   | [Tfvars File](./canso-dataplane-configs/irsa-roles/alb-controller/auto.tfvars)   | [Conf File](./canso-dataplane-configs/irsa-roles/alb-controller/backend.conf)  | canso-dataplane-alb-controller-irsa-role        |
@@ -208,6 +210,12 @@ We create the following IRSA roles in this step, each of which are in separate m
 | Canso Agent IRSA | [Tfvars File](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars)      | [Conf File](./canso-dataplane-configs/irsa-roles/canso-agent/backend.conf)     | devagent-dataplane-irsa-role                     |
 | Airflow IRSA     | [Tfvars File](./canso-dataplane-configs/irsa-roles/airflow/auto.tfvars)          | [Conf File](./canso-dataplane-configs/irsa-roles/airflow/backend.conf)         | airflow-canso-dataplane-irsa-role                |
 
+
+> **NOTE**
+>
+>The RoleArnName values listed in the table above are the default role names created when using the Terraform module. These default names are compatible with the canso-helm-chart without requiring any modifications.
+>
+>If you want to use different role names, you can modify the `RoleArnName` in the respective tfvars files. However, please note that any changes to these names must be reflected when using the canso-helm-chart to deploy the Canso Dataplane. Ensure that the role names in your Helm chart configuration match the ones you've defined in your Terraform configuration to maintain consistency and proper functionality.
 
 1. Update the S3 bucket and DynamoDB table details in the `backend.conf` file in the respective folders if needed.
 2. Update the `auto.tfvars` file in the respective folder if needed
