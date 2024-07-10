@@ -308,8 +308,8 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 ```console
 cd modules/canso-irsa
-terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/dev-agent/backend.conf
-terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/dev-agent/auto.tfvars
+terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/canso-agent/backend.conf
+terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars
 ```
 
 8. Create Airflow IRSA
@@ -350,8 +350,12 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 > by default.
 
 > [!IMPORTANT]
-> Dependencies - Create a Security Group for RDS, which will then be used as an input in the 
+> **Dependencies**:
+> 1. Create a Security Group for RDS, which will then be used as an input in the 
 > [`auto.tfvars`](./canso-dataplane-configs/rds/auto.tfvars) file
+> 2. Create a [KMS](https://aws.amazon.com/kms/) key for RDS, This key will be referenced in the
+> [`auto.tfvars`](./canso-dataplane-configs/rds/auto.tfvars) file and used in the KMS encrypt command mentioned in the
+> [`db-creds.yaml`](./canso-dataplane-configs/rds/db-creds.yaml) file
 
 To create the RDS DB instance, navigate to the `canso-rds` module directory and run the following Terraform commands:
 
@@ -379,6 +383,27 @@ cd modules/canso-s3
 terraform init -backend-config=../../canso-dataplane-configs/s3/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/s3/auto.tfvars
 ```
+
+---
+
+### Step 7 - Secrets (in AWS Secrets Manager)
+
+To pull Canso maintained images in your EKS, we use credentials that will be stored as secrets in your [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/). This helps authorised and secure access to all images needed to run Canso applications w/o exposing secrets.
+  
+The Canso team will provide you with dockerhub credentials, which must be added to your AWS secret manager. The secret should be in plain text format and have `aws/secretsmanager` as the encryption key.
+
+```console
+{"dockerhub":"{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"<GET VALUE FROM CANSO TEAM>>",\"email\":\"<GET VALUE FROM CANSO TEAM>",\"password\":\"<GET VALUE FROM CANSO TEAM>",\"username\":\"<GET VALUE FROM CANSO TEAM>"}}}"}
+```
+
+- [ ] Needs additional clarification, needs update
+> Another instance where we use secrets are username password to access & log into the Airflow Web Server.
+
+> The secret should be in following plain text format.
+
+> ```console
+> {"username":"db-name","password":"db-password"}
+> ```
 
 ---
 
