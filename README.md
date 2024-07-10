@@ -39,6 +39,7 @@ Canso Applications are deployed in your EKS cluster (also called the data plane)
 
 | Component                      | IRSA Name                                         | IAM Role Value (Default)                                                             |
 |--------------------------------|---------------------------------------------------|--------------------------------------------------------------------------------------|
+| `node_role`                    | `canso-dataplane-cluster-node-role`               | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-cluster-node-role`               |
 | `aws_load_balancer_controller` | `canso-dataplane-alb-controller-irsa-role`        | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-alb-controller-irsa-role`        |
 | `canso_karpenter`              | `canso-dataplane-karpenter-prod-irsa-role`        | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-karpenter-prod-irsa-role`        |
 | `external_secrets`             | `canso-dataplane-external-secrets-prod-irsa-role` | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-external-secrets-prod-irsa-role` |
@@ -47,6 +48,23 @@ Canso Applications are deployed in your EKS cluster (also called the data plane)
 | `spark`                        | `canso-dataplane-spark-s3-irsa-role`              | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-spark-s3-irsa-role`              |
 | `canso_agent`                  | `devagent-dataplane-irsa-role`                    | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/devagent-dataplane-irsa-role`                    |
 | `canso_airflow`                | `airflow-canso-dataplane-irsa-role`               | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/airflow-canso-dataplane-irsa-role`               |
+
+> [!CAUTION]
+> In the Canso UI, the you'll see a section which has the following JSON as the default. This is in line with the values in the table above. If you've made changes to IRSA roles during Terraform setup, please edit the values in the code block accordingly.
+
+```json
+{
+  "node_role" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-cluster-node-role",
+  "aws_load_balancer_controller" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-alb-controller-irsa-role",
+  "canso_karpenter" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-karpenter-prod-irsa-role",
+  "external_secrets" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-external-secrets-prod-irsa-role",
+  "aws_ebs_csi_driver" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-ebs-csi-prod-irsa-role",
+  "aws_efs_csi_driver" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-efs-csi-prod-irsa-role",
+  "spark" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/canso-dataplane-spark-s3-irsa-role",
+  "canso_agent" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/devagent-dataplane-irsa-role",
+  "canso_airflow" : "arn:aws:iam::<AWS_ACCOUNT_ID>:role/airflow-canso-dataplane-irsa-role"
+}
+```
 
 
 ## Dependencies
