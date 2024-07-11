@@ -306,6 +306,13 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 7. Create Canso Agent IRSA
 
+> [!IMPORTANT]
+> **Dependencies**:
+> Update the Canso account ID in the
+> [`auto.tfvars`](./canso-dataplane-configs/irsa-roles/canso-agent/auto.tfvars) file,
+> will be provided by the Canso Team.
+
+
 ```console
 cd modules/canso-irsa
 terraform init -backend-config=../../canso-dataplane-configs/irsa-roles/canso-agent/backend.conf
