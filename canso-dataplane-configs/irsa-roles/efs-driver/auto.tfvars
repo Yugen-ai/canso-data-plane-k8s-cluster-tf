@@ -23,7 +23,7 @@ iam_policy_tags = {
 }
 
 ############################### 
-## IAM Irsa Role
+## IAM IRSA Role
 ###############################
 
 create_role = true

@@ -230,6 +230,10 @@ public_subnet_ids = [
 vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 ```
 
+> [!CAUTION]
+> If you change the cluster name, ensure you update the same in the rest of the configs, especially the IRSA roles.
+> For e.g Each IRSA role has a `cluster_service_accounts` variable that uses the cluster name.
+
 ---
 
 ### Step 3 - AWS IRSA Roles

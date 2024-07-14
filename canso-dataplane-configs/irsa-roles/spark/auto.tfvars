@@ -30,7 +30,10 @@ role_name   = "canso-dataplane-spark-s3-irsa-role"
 name_prefix = "canso-dataplane-spark-s3-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["streaming-jobs:spark-operator-spark"]
+  "canso-dataplane-cluster" = ["spark-streaming-jobs:spark-operator-spark", "spark-streaming-ml-jobs:spark-operator-spark"]
+  # TODO - Question re `spark-operator-spark` - To be resolved before PR merge.
+  # https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L6
+  # https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L17
 }
 
 tags = {
