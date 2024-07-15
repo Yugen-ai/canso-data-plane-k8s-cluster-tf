@@ -32,8 +32,9 @@ name_prefix = "canso-dataplane-spark-s3-irsa-role"
 cluster_service_accounts = {
   "canso-dataplane-cluster" = ["spark-streaming-jobs:spark-operator-spark", "spark-streaming-ml-jobs:spark-operator-spark"]
   # TODO - Question re `spark-operator-spark` - To be resolved before PR merge.
-  # https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L6
-  # https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L17
+  # Namespace - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L6
+  # Namespace - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L17
+  # SA from Spark Operator - https://github.com/kubeflow/spark-operator/blob/b8c901397c042dbaaa8ff5ab15d16181b4a325e7/charts/spark-operator-chart/templates/_helpers.tpl#L57-L66
 }
 
 tags = {
