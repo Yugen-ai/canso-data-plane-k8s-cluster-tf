@@ -29,7 +29,7 @@ role_name   = "devagent-dataplane-irsa-role"
 name_prefix = "devagent-dataplane-irsa-role"
 
 cluster_service_accounts = {
-  "helm-dep-cluster" = ["canso-dataplane:canso-agent"]
+  "canso-dataplane-cluster" = ["canso-dataplane:canso-agent"]
 }
 
 tags = {
