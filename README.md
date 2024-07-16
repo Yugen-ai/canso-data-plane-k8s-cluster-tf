@@ -215,7 +215,7 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 
 > [!IMPORTANT]
 > Dependencies (Output from the VPC module to be used as inputs here)
-> 1. `vpc_module_private_subnet_ids`: The private subnet IDs of the VPC
+> 1. `vpc_module_public_subnet_ids`: The public subnet IDs of the VPC
 > 2. `vpc_module_vpc_id`: The ID of the VPC
 
 ```terraform
