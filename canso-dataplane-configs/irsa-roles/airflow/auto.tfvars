@@ -33,7 +33,7 @@ role_name   = "airflow-canso-dataplane-irsa-role"
 name_prefix = "airflow-canso-dataplane-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["airflow:ml-agents-dataplane", "airflow-jobs:airflow-jobs-sa", "airflow-jobs:default"]
+  "canso-dataplane-cluster" = ["airflow:airflow-sa", "canso-airflow-jobs:airflow-jobs-sa", "canso-airflow-jobs:default"]
 }
 
 tags = {
