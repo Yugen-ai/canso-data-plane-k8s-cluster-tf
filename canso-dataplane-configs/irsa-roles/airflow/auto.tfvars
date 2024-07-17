@@ -34,6 +34,10 @@ name_prefix = "airflow-canso-dataplane-irsa-role"
 
 cluster_service_accounts = {
   "canso-dataplane-cluster" = ["airflow:airflow-sa", "canso-airflow-jobs:airflow-jobs-sa", "canso-airflow-jobs:default"]
+  # Namespace airflow - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L427
+  # Namespace canso-airflow-jobs - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L306
+  # SA from Airflow - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L312
+  # SA from canso-airflow-jobs - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/canso-airflow-jobs.yaml#L45
 }
 
 tags = {
