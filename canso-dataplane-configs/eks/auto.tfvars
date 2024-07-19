@@ -16,7 +16,7 @@ vpc_id          = "vpc-xxxxxxxxxxxxxxxxx"
 cluster_sg_tags = {
   Name = "canso-dataplane-cluster-cluster-sg"
 }
-k8s_version = "1.28"
+k8s_version = "1.29"
 
 ####################### node group general #################
 eks_node_role_name         = "canso-dataplane-cluster-node-role"
@@ -30,9 +30,9 @@ general_ng_node_group_name = "general"
 
 
 general_ng_tags         = { "Environment" = "prod", "Name" = "general" }
-general_ng_k8s_version  = "1.28"
-general_ng_desired_size = 1
-general_ng_max_size     = 5
+general_ng_k8s_version  = "1.29"
+general_ng_desired_size = 6
+general_ng_max_size     = 7
 general_ng_min_size     = 1
 general_ami_type        = "AL2_x86_64"
 general_capacity_type   = "ON_DEMAND"
