@@ -384,8 +384,20 @@ terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs
 2. Update the [`auto.tfvars`](./canso-dataplane-configs/s3/auto.tfvars) file if needed.
 
 > [!WARNING]
-> DO NOT CHANGE THE BUCKET NAMES
-> [`auto.tfvars`](./canso-dataplane-configs/s3/auto.tfvars) file
+> You should name your bucket such that it is [unique according to S3 naming requirements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html#:~:text=Bucket%20names%20must%20be%20unique%20across%20all%20AWS%20accounts%20in%20all%20the%20AWS%20Regions%20within%20a%20partition.%20A%20partition%20is%20a%20grouping%20of%20Regions.%20AWS%20currently%20has%20three%20partitions%3A%20aws%20(Standard%20Regions)%2C%20aws%2Dcn%20(China%20Regions)%2C%20and%20aws%2Dus%2Dgov%20(AWS%20GovCloud%20(US)).). 
+
+For e.g. 
+
+```console
+{UNIQUE_TENANT_NAME}-canso-materialised-features
+{UNIQUE_TENANT_NAME}-canso-materialised-logs
+{UNIQUE_TENANT_NAME}-canso-materialised-artifacts
+```
+
+> [!IMPORTANT]
+> Dependencies:
+> Ensure you replace `UNIQUE_TENANT_NAME` with your actual value in the
+> [`auto.tfvars`](./canso-dataplane-configs/rds/auto.tfvars) file
 
 To create the S3 buckets, navigate to the `canso-s3` module directory and run the following Terraform commands:
 
@@ -394,6 +406,10 @@ cd modules/canso-s3
 terraform init -backend-config=../../canso-dataplane-configs/s3/backend.conf
 terraform apply -no-color -auto-approve --var-file=../../canso-dataplane-configs/s3/auto.tfvars
 ```
+
+> [!CAUTION]
+> 1. Use the {UNIQUE_TENANT_NAME}-canso-materialised-features bucket for storing materialized features when registering sink details.
+> 2. Provide the {UNIQUE_TENANT_NAME}-canso-materialised-logs bucket when generating the tenant dataplane YAML through the API.
 
 ---
 

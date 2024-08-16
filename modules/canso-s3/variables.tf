@@ -49,3 +49,8 @@ variable "expiration_days" {
   type        = number
   default     = 365
 }
+
+variable "tenant_name" {
+  description = "Unique name for the tenant"
+  type        = string
+}
