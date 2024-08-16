@@ -33,6 +33,7 @@ No modules.
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | Force destroy the S3 bucket and its contents when destroying the Terraform resource | `bool` | `false` | no |
 | <a name="input_lifecycle_rule_enabled"></a> [lifecycle\_rule\_enabled](#input\_lifecycle\_rule\_enabled) | Enable lifecycle rule for the S3 bucket | `bool` | `true` | no |
 | <a name="input_region"></a> [region](#input\_region) | region name | `string` | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | Unique name for the tenant | `string` | n/a | yes |
 | <a name="input_transition_days"></a> [transition\_days](#input\_transition\_days) | Number of days before objects are transitioned to the specified storage class | `number` | `120` | no |
 | <a name="input_transition_storage_class"></a> [transition\_storage\_class](#input\_transition\_storage\_class) | Storage class to transition objects to | `string` | `"GLACIER"` | no |
 | <a name="input_versioning_enabled"></a> [versioning\_enabled](#input\_versioning\_enabled) | Enable versioning for the S3 bucket | `bool` | `true` | no |

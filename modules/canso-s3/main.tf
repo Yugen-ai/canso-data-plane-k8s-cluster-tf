@@ -1,12 +1,12 @@
 resource "aws_s3_bucket" "this" {
   for_each = { for bucket in var.buckets : bucket => bucket }
 
-  bucket        = each.value
+  bucket        = "${var.tenant_name}-${each.value}"
   force_destroy = var.force_destroy
 
   tags = merge(
     {
-      "Name" = each.key
+      "Name" = "${var.tenant_name}-${each.value}"
     },
     {
       "canso.ai/product-component" = "app-dependencies",

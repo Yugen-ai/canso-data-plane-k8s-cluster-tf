@@ -1,4 +1,5 @@
-buckets                  = ["canso-materialised-features", "canso-materialised-artifacts", "canso-materialised-logs"] # Do not change these names since the canso developer agent and job orchestrator assume these buckets to be present in the data plane
+tenant_name              = "UNIQUE_TENANT_NAME" # Replace UNIQUE_TENANT_NAME with your actual value.
+buckets                  = ["canso-materialised-features", "canso-materialised-logs", "canso-materialised-artifacts"]
 bucket_acl               = "private"
 force_destroy            = true
 versioning_enabled       = true
