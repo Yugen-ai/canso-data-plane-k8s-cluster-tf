@@ -9,7 +9,7 @@ iam_policy_policy = <<EOF
             "Action": [
                 "sts:AssumeRole"
             ],
-            "Resource": "arn:aws:iam::<control-plane-account-id>:role/CrossAccountSQSAccessRole"
+            "Resource": "arn:aws:iam::<control-plane-account-id>:role/CansoCrossAccountSQSAccessRole"
         }
     ]
 }
