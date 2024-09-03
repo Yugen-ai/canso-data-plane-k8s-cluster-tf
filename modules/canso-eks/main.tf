@@ -121,6 +121,11 @@ resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadO
   role       = aws_iam_role.nodes.name
 }
 
+resource "aws_iam_role_policy_attachment" "nodes-AmazonSSMManagedInstanceCore" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.nodes.name
+}
+
 ############################### 
 ## EKS Node Group
 ###############################
@@ -149,6 +154,7 @@ resource "aws_eks_node_group" "general" {
     aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.nodes-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.nodes-AmazonSSMManagedInstanceCore,
     aws_eks_cluster.demo
   ]
 }
