@@ -4,8 +4,8 @@
 ################################################
 
 ---
-username: my_username
-password: my_strong_password
+username: postgres
+password: K0Fsdhfaiue23742++c
 
 
 ################################################
@@ -14,7 +14,7 @@ password: my_strong_password
 
 # aws kms encrypt \
 #   --plaintext fileb://db-creds.yaml \
-#   --key-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-#   --region ap-south-1 \
+#   --key-id 7e3e6130-f015-46a6-a31c-932263b7b5e4 \
+#   --region us-east-1 \
 #   --output text \
 #   --query CiphertextBlob > db-creds.yaml.encrypted

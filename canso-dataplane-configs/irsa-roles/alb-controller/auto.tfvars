@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "canso-dataplane-alb-controller-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplabe-v1-alb-controller-policy"
 iam_policy_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -223,7 +223,7 @@ iam_policy_policy = <<EOF
 } 
 EOF
 iam_policy_tags = {
-  Name       = "canso-dataplane-alb-controller-policy"
+  Name       = "canso-dplane-v1-alb-controller-policy"
   Managed_by = "terraform"
 }
 
@@ -233,14 +233,14 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "canso-dataplane-alb-controller-irsa-role"
-name_prefix = "canso-dataplane-alb-controller-irsa-role"
+role_name   = "canso-dplane-v1-alb-controller-irsa-role"
+name_prefix = "canso-dplane-v1-alb-controller-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["aws-load-balancer-controller:aws-load-balancer-controller"]
+  "canso-dplane-v1" = ["aws-load-balancer-controller:aws-load-balancer-controller"]
 }
 
 tags = {
-  Name       = "canso-dataplane-alb-controller-irsa-role"
+  Name       = "canso-dplane-v1-alb-controller-irsa-role"
   Managed_by = "terraform"
 }

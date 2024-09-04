@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "canso-dataplane-spark-s3-irsa-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplane-v1-spark-s3-irsa-policy"
 iam_policy_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -16,7 +16,7 @@ iam_policy_policy = <<EOF
 }
 EOF
 iam_policy_tags = {
-  Name       = "canso-dataplane-spark-s3-irsa-policy"
+  Name       = "canso-dplane-v1-spark-s3-irsa-policy"
   Managed_by = "terraform"
 }
 
@@ -26,11 +26,11 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "canso-dataplane-spark-s3-irsa-role"
-name_prefix = "canso-dataplane-spark-s3-irsa-role"
+role_name   = "canso-dplane-v1-spark-s3-irsa-role"
+name_prefix = "canso-dplane-v1-spark-s3-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["spark-streaming-jobs:spark-operator-spark", "spark-streaming-ml-jobs:spark-operator-spark"]
+  "canso-dplane-v1" = ["spark-streaming-jobs:spark-operator-spark", "spark-streaming-ml-jobs:spark-operator-spark"]
   # TODO - Question re `spark-operator-spark` - To be resolved before PR merge.
   # Namespace - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L6
   # Namespace - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/templates/aws/spark-operator.yaml#L17
@@ -38,6 +38,6 @@ cluster_service_accounts = {
 }
 
 tags = {
-  Name       = "canso-dataplane-spark-s3-irsa-role"
+  Name       = "canso-dplane-v1-spark-s3-irsa-role"
   Managed_by = "terraform"
 }

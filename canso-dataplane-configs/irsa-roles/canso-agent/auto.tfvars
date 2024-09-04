@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "devagent-dataplane-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplane-v1-devagent-policy"
 iam_policy_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -9,13 +9,13 @@ iam_policy_policy = <<EOF
             "Action": [
                 "sts:AssumeRole"
             ],
-            "Resource": "arn:aws:iam::<control-plane-account-id>:role/CansoCrossAccountSQSAccessRole"
+            "Resource": "arn:aws:iam::010928226648:role/CansoCrossAccountSQSAccessRole"
         }
     ]
 }
 EOF
 iam_policy_tags = {
-  Name       = "devagent-dataplane-policy"
+  Name       = "canso-dplane-v1-devagent-policy"
   Managed_by = "terraform"
 }
 
@@ -25,14 +25,14 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "devagent-dataplane-irsa-role"
-name_prefix = "devagent-dataplane-irsa-role"
+role_name   = "canso-dplane-v1-devagent-irsa-role"
+name_prefix = "canso-dplane-v1-devagent-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["canso-dataplane:canso-agent"]
+  "canso-dplane-v1" = ["canso-dataplane:canso-agent"]
 }
 
 tags = {
-  Name       = "devagent-dataplane-irsa-role"
+  Name       = "canso-dplane-v1-devagent-irsa-role"
   Managed_by = "terraform"
 }

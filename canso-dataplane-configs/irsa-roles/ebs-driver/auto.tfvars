@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "canso-dataplane-ebs-csi-prod-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplane-v1-ebs-csi-policy"
 iam_policy_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -136,7 +136,7 @@ iam_policy_policy = <<EOF
 }
 EOF
 iam_policy_tags = {
-  Name       = "ebs-csi-prod-policy"
+  Name       = "canso-dplane-v1-ebs-csi-policy"
   Managed_by = "terraform"
 }
 
@@ -146,14 +146,14 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "canso-dataplane-ebs-csi-prod-irsa-role"
-name_prefix = "canso-dataplane-ebs-csi-prod-irsa-role"
+role_name   = "canso-dplane-v1-ebs-csi-irsa-role"
+name_prefix = "canso-dplane-v1-ebs-csi-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["kube-system:ebs-csi-driver-sa", "ebs-driver:ebs-csi-driver-sa"]
+  "canso-dplane-v1" = ["kube-system:ebs-csi-driver-sa", "ebs-driver:ebs-csi-driver-sa"]
 }
 
 tags = {
-  Name       = "canso-dataplane-ebs-csi-prod-irsa-role"
+  Name       = "canso-dplane-v1-ebs-csi-irsa-role"
   Managed_by = "terraform"
 }

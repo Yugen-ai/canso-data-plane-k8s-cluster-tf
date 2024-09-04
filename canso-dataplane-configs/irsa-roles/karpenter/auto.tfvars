@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "canso-dataplane-karpenter-prod-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplane-v1-karpenter-policy"
 iam_policy_policy = <<EOF
 {
     "Statement": [
@@ -58,7 +58,7 @@ iam_policy_policy = <<EOF
 }
 EOF
 iam_policy_tags = {
-  Name       = "canso-dataplane-karpenter-prod-policy"
+  Name       = "canso-dplane-v1-karpenter-policy"
   Managed_by = "terraform"
 }
 
@@ -68,14 +68,14 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "canso-dataplane-karpenter-prod-irsa-role"
-name_prefix = "canso-dataplane-karpenter-prod-irsa-role"
+role_name   = "canso-dplane-v1-karpenter-irsa-role"
+name_prefix = "canso-dplane-v1-karpenter-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["karpenter:karpenter"]
+  "canso-dplane-v1" = ["karpenter:karpenter"]
 }
 
 tags = {
-  Name       = "canso-dataplane-karpenter-prod-irsa-role"
+  Name       = "canso-dplane-v1-karpenter-irsa-role"
   Managed_by = "terraform"
 }

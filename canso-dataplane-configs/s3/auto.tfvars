@@ -1,4 +1,4 @@
-tenant_name              = "UNIQUE_TENANT_NAME" # Replace UNIQUE_TENANT_NAME with your actual value.
+tenant_name              = "sample-tenant-1" # Replace UNIQUE_TENANT_NAME with your actual value.
 buckets                  = ["canso-materialised-features", "canso-materialised-logs", "canso-materialised-artifacts"]
 bucket_acl               = "private"
 force_destroy            = true
@@ -7,4 +7,4 @@ lifecycle_rule_enabled   = true
 transition_days          = 120
 transition_storage_class = "GLACIER"
 expiration_days          = 365
-region                   = "ap-south-1"
+region                   = "us-east-1"

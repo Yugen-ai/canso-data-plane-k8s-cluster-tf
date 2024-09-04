@@ -1,5 +1,5 @@
-region            = "ap-south-1"
-iam_policy_name   = "airflow-canso-dataplane-policy"
+region            = "us-east-1"
+iam_policy_name   = "canso-dplane-v1-airflow-policy"
 iam_policy_policy = <<EOF
 {
 	"Statement": [
@@ -19,7 +19,7 @@ iam_policy_policy = <<EOF
 }
 EOF
 iam_policy_tags = {
-  Name       = "airflow-canso-dataplane-policy"
+  Name       = "canso-dplane-v1-airflow-policy"
   Managed_by = "terraform"
 }
 
@@ -29,11 +29,11 @@ iam_policy_tags = {
 
 create_role = true
 
-role_name   = "airflow-canso-dataplane-irsa-role"
-name_prefix = "airflow-canso-dataplane-irsa-role"
+role_name   = "canso-dplane-v1-airflow-irsa-role"
+name_prefix = "canso-dplane-v1-airflow-irsa-role"
 
 cluster_service_accounts = {
-  "canso-dataplane-cluster" = ["airflow:airflow-sa", "canso-airflow-jobs:airflow-jobs-sa", "canso-airflow-jobs:default"]
+  "canso-dplane-v1" = ["airflow:airflow-sa", "canso-airflow-jobs:airflow-jobs-sa", "canso-airflow-jobs:default"]
   # Namespace airflow - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L427
   # Namespace canso-airflow-jobs - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L306
   # SA from Airflow - https://github.com/Yugen-ai/canso-helm-charts/blob/a912ebd652a4d2869738c3a166a77c45e6659f6f/canso-data-plane/canso-aws-eks-superchart/values.yaml#L312
@@ -41,6 +41,6 @@ cluster_service_accounts = {
 }
 
 tags = {
-  Name       = "airflow-canso-dataplane-irsa-role"
+  Name       = "canso-dplane-v1-airflow-irsa-role"
   Managed_by = "terraform"
 }
