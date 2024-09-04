@@ -29,5 +29,5 @@ resource "aws_db_instance" "this" {
   apply_immediately       = true
   backup_retention_period = 0
 
-  depends_on      = [aws_db_subnet_group.default]
+  depends_on = [aws_db_subnet_group.default]
 }
