@@ -23,7 +23,7 @@ eks_node_role_name         = "canso-dplane-v1-node-role"
 ami_type                   = "AL2_x86_64"
 capacity_type              = "SPOT"
 general_ng_disk_size       = 30
-general_ng_instance_types  = ["t3.medium"]
+general_ng_instance_types  = ["t3.xlarge"]
 general_ng_labels          = { "role" = "general" }
 general_ng_node_group_name = "general"
 
