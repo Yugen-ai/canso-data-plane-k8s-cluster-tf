@@ -67,11 +67,10 @@ resource "aws_security_group" "cluster_sg" {
   tags        = var.cluster_sg_tags
 
   ingress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    security_groups = [var.alb_security_group_id]
   }
 
   egress {
