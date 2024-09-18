@@ -16,7 +16,7 @@ vpc_id          = "vpc-xxxxxxxxxxxxxxxxx"
 cluster_sg_tags = {
   Name = "canso-dataplane-cluster-cluster-sg"
 }
-k8s_version = "1.29"
+k8s_version           = "1.29"
 alb_security_group_id = "sg-xxxxxxxxxxxxxxxxxx"
 
 ####################### node group general #################
