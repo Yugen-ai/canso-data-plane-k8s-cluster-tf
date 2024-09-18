@@ -38,6 +38,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_alb_security_group_id"></a> [alb\_security\_group\_id](#input\_alb\_security\_group\_id) | AlB Security Group ID for EKS ingress security | `string` | n/a | yes |
 | <a name="input_ami_type"></a> [ami\_type](#input\_ami\_type) | ami\_type | `string` | n/a | yes |
 | <a name="input_capacity_type"></a> [capacity\_type](#input\_capacity\_type) | capacity\_type | `string` | n/a | yes |
 | <a name="input_cluster_role_name"></a> [cluster\_role\_name](#input\_cluster\_role\_name) | cluster\_role\_name | `string` | n/a | yes |
