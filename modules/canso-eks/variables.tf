@@ -138,3 +138,8 @@ variable "map_role_string_admin" {
   type        = string
   #default = ""
 }
+
+variable "alb_security_group_id" {
+  description = "AlB Security Group ID for EKS ingress security"
+  type        = string
+}
