@@ -234,7 +234,7 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 > If you change the cluster name, ensure you update the same in the rest of the configs, especially the IRSA roles.
 > For e.g Each IRSA role has a `cluster_service_accounts` variable that uses the cluster name.
 
-Any ingress rules(forthe VPC security group) or additional rules(for the EKS security group) can be added as follows:
+Any ingress rules(for the VPC security group) or additional rules(for the EKS security group) can be added as follows:
 ```
 additional_security_group_rules = [
   {
