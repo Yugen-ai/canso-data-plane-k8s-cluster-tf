@@ -39,7 +39,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_security_group_rules"></a> [additional\_security\_group\_rules](#input\_additional\_security\_group\_rules) | List of additional security group rules to create for other security groups | <pre>list(object({<br/>    type              = string<br/>    from_port         = number<br/>    to_port           = number<br/>    protocol          = string<br/>    source_security_group_id = string<br/>    description       = optional(string)<br/>  }))</pre> | `[]` | no |
+| <a name="input_additional_security_group_rules"></a> [additional\_security\_group\_rules](#input\_additional\_security\_group\_rules) | List of additional security group rules to create for other security groups | <pre>list(object({<br/>    type                     = string<br/>    from_port                = number<br/>    to_port                  = number<br/>    protocol                 = string<br/>    source_security_group_id = string<br/>    description              = optional(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_ami_type"></a> [ami\_type](#input\_ami\_type) | ami\_type | `string` | n/a | yes |
 | <a name="input_capacity_type"></a> [capacity\_type](#input\_capacity\_type) | capacity\_type | `string` | n/a | yes |
 | <a name="input_cluster_role_name"></a> [cluster\_role\_name](#input\_cluster\_role\_name) | cluster\_role\_name | `string` | n/a | yes |
