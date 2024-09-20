@@ -234,6 +234,35 @@ vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
 > If you change the cluster name, ensure you update the same in the rest of the configs, especially the IRSA roles.
 > For e.g Each IRSA role has a `cluster_service_accounts` variable that uses the cluster name.
 
+Any ingress rules(for the VPC security group) or additional rules(for the EKS security group) can be added as follows:
+```
+additional_security_group_rules = [
+  {
+    type                     = "ingress"
+    from_port                = 30000
+    to_port                  = 32767
+    protocol                 = "tcp"
+    source_security_group_id = "sg-xxxxxxxxxxxxxxxxxxxxx"  
+    description              = "Allow security group to access the EKS security group"
+  }
+]
+
+vpc_ingress_rules = [
+  {
+    description     = "Allow HTTP from anywhere"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    cidr_blocks     = ["0.0.0.0/0"]
+    security_groups = []
+  }
+]
+```
+
+> [!CAUTION]
+> Removing any previous ingress rules applied will not be detected by terraform. This is due to a known issue -  https://github.com/hashicorp/terraform-provider-aws/issues/4399 This will be fixed in a later release. Users can remove the ingress rules from the security group manually if needed.
+
+
 ---
 
 ### Step 3 - AWS IRSA Roles

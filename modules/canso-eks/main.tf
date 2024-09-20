@@ -46,6 +46,7 @@ resource "aws_eks_cluster" "demo" {
   ]
   tags = var.eks_cluster_tags
 
+
   vpc_config {
 
     endpoint_private_access = var.endpoint_private_access
@@ -66,11 +67,16 @@ resource "aws_security_group" "cluster_sg" {
   vpc_id      = var.vpc_id
   tags        = var.cluster_sg_tags
 
-  ingress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    security_groups = [var.alb_security_group_id]
+  dynamic "ingress" {
+    for_each = var.vpc_ingress_rules
+    content {
+      description     = ingress.value.description
+      from_port       = ingress.value.from_port
+      to_port         = ingress.value.to_port
+      protocol        = ingress.value.protocol
+      cidr_blocks     = ingress.value.cidr_blocks
+      security_groups = ingress.value.security_groups
+    }
   }
 
   egress {
@@ -80,6 +86,19 @@ resource "aws_security_group" "cluster_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+}
+
+resource "aws_security_group_rule" "additional_rules" {
+  depends_on = [aws_eks_cluster.demo]
+  count      = length(var.additional_security_group_rules)
+
+  type                     = var.additional_security_group_rules[count.index].type
+  from_port                = var.additional_security_group_rules[count.index].from_port
+  to_port                  = var.additional_security_group_rules[count.index].to_port
+  protocol                 = var.additional_security_group_rules[count.index].protocol
+  security_group_id        = aws_eks_cluster.demo.vpc_config[0].cluster_security_group_id
+  source_security_group_id = var.additional_security_group_rules[count.index].source_security_group_id
+  description              = lookup(var.additional_security_group_rules[count.index], "description", null)
 }
 
 ############################### 

@@ -139,7 +139,32 @@ variable "map_role_string_admin" {
   #default = ""
 }
 
-variable "alb_security_group_id" {
-  description = "AlB Security Group ID for EKS ingress security"
-  type        = string
+#### Security group rules
+
+variable "vpc_ingress_rules" {
+  description = "List of ingress rules"
+  type = list(object({
+    description     = string
+    from_port       = number
+    to_port         = number
+    protocol        = string
+    cidr_blocks     = list(string)
+    security_groups = list(string)
+  }))
+  default = []
 }
+
+
+variable "additional_security_group_rules" {
+  description = "List of additional security group rules to create for other security groups"
+  type = list(object({
+    type                     = string
+    from_port                = number
+    to_port                  = number
+    protocol                 = string
+    source_security_group_id = string
+    description              = optional(string)
+  }))
+  default = []
+}
+
