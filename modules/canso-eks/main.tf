@@ -89,8 +89,8 @@ resource "aws_security_group" "cluster_sg" {
 }
 
 resource "aws_security_group_rule" "additional_rules" {
-  depends_on = [ aws_eks_cluster.demo ]
-  count = length(var.additional_security_group_rules)
+  depends_on = [aws_eks_cluster.demo]
+  count      = length(var.additional_security_group_rules)
 
   type                     = var.additional_security_group_rules[count.index].type
   from_port                = var.additional_security_group_rules[count.index].from_port

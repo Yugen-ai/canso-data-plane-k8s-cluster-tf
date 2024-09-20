@@ -158,13 +158,13 @@ variable "vpc_ingress_rules" {
 variable "additional_security_group_rules" {
   description = "List of additional security group rules to create for other security groups"
   type = list(object({
-    type              = string
-    from_port         = number
-    to_port           = number
-    protocol          = string
+    type                     = string
+    from_port                = number
+    to_port                  = number
+    protocol                 = string
     source_security_group_id = string
-    description       = optional(string)
+    description              = optional(string)
   }))
-  default =[]
+  default = []
 }
 
