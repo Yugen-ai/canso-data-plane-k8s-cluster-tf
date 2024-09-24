@@ -131,3 +131,26 @@ variable "statements" {
   type        = list(object({ actions = list(string), resources = list(string) }))
   default     = []
 }
+
+variable "region" {
+  description = "region name"
+  type        = string
+}
+
+variable "managed_policy_arns" {
+  description = "Set of managed IAM policy ARNs to attach to the IAM role"
+  type        = list(string)
+  default     = []
+}
+
+variable "dynamic_policy" {
+  description = "Whether to use dynamic_policy in the IAM policy"
+  type        = bool
+  default     = false
+}
+
+variable "eks_node_role_arn" {
+  description = "ARN of the IAM role associated with the EKS nodes"
+  type        = string
+  default     = ""
+}

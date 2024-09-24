@@ -1,8 +1,3 @@
-variable "region" {
-  description = "region name"
-  type        = string
-}
-
 ############################### 
 ## AWS IAM Policy
 ###############################
@@ -14,7 +9,7 @@ resource "aws_iam_policy" "policy" {
   path        = var.iam_policy_path
   description = var.iam_policy_description
 
-  policy = var.iam_policy_policy
+  policy = var.dynamic_policy ? local.policy : var.iam_policy_policy
 
   tags = var.iam_policy_tags
 }
@@ -73,10 +68,27 @@ resource "aws_iam_role" "this" {
   tags                  = var.tags
 }
 
+locals {
+  policy = var.dynamic_policy ? replace(var.iam_policy_policy, "ROLE_ARN_PLACEHOLDER", var.eks_node_role_arn) : var.iam_policy_policy
+}
+
+resource "aws_iam_role_policy_attachment" "custom" {
+  count      = var.create_role && var.create_policy ? 1 : 0
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.policy[0].arn
+}
+
+resource "aws_iam_role_policy_attachment" "managed" {
+  count      = var.create_role ? length(var.managed_policy_arns) : 0
+  role       = aws_iam_role.this[0].name
+  policy_arn = element(tolist(var.managed_policy_arns), count.index)
+}
+
 resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.policy[0].arn
 }
+
 
 resource "aws_iam_instance_profile" "this" {
   count = var.create_role && var.create_instance_profile ? 1 : 0
