@@ -40,6 +40,8 @@ No modules.
 | <a name="input_create_instance_profile"></a> [create\_instance\_profile](#input\_create\_instance\_profile) | IAM create\_instance\_profile | `bool` | `false` | no |
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Whether to create the IAM policy | `bool` | `true` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
+| <a name="input_dynamic_policy"></a> [dynamic\_policy](#input\_dynamic\_policy) | Whether to use dynamic\_policy in the IAM policy | `bool` | `false` | no |
+| <a name="input_eks_node_role_arn"></a> [eks\_node\_role\_arn](#input\_eks\_node\_role\_arn) | ARN of the IAM role associated with the EKS nodes | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | <a name="input_iam_policy_description"></a> [iam\_policy\_description](#input\_iam\_policy\_description) | The description of the policy | `string` | `"IAM Policy"` | no |
 | <a name="input_iam_policy_name"></a> [iam\_policy\_name](#input\_iam\_policy\_name) | The name of the policy | `string` | `""` | no |
@@ -50,7 +52,6 @@ No modules.
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `43200` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | The JSON policy for the IAM role | `string` | `""` | no |
 | <a name="input_region"></a> [region](#input\_region) | region name | `string` | n/a | yes |
-| <a name="input_replace_role_arn_placeholder"></a> [replace\_role\_arn\_placeholder](#input\_replace\_role\_arn\_placeholder) | Whether to replace ROLE\_ARN\_PLACEHOLDER in the IAM policy | `bool` | `false` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM Role description | `string` | `""` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of IAM role | `string` | `null` | no |
 | <a name="input_role_name_prefix"></a> [role\_name\_prefix](#input\_role\_name\_prefix) | IAM role name prefix | `string` | `null` | no |
